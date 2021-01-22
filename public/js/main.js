@@ -12,8 +12,9 @@ let personne = {
         this.argent = this.argent - ingredients.prix
         console.log(`${this.nom} paye ses article`);
     },
-    couper(){
-        console.log(`${this.nom} coupe ses ${this.ingredients} avec un ${this.outil}`);
+    couper(ingredients){
+        ingredients.etat = "coupé"
+        console.log(`l'${ingredients.nom} est maintenant ${ingredients.etat}`);
     }
 }
 
@@ -89,34 +90,69 @@ console.log(bol);
 // OMELETTE
 
 console.log(personne.nom + " est actuellement à la " + personne.lieu);
+
+// DEPLACEMENT AU MAGASIN
+
 personne.sedeplacer(epicerie)
-// console.log(personne.nom + " se déplace à l'" + epicerie.nom);
+
 
 console.log(personne.nom + " récupère le " + panier.type +  " et le met dans sa main droite");
 epicerie.paniers[panier.contenu.splice(0,1)]
 
+// ACHAT
+
 personne.mainDroite.push(epicerie.paniers[0])
 console.log(`${personne.nom} a pris un ${panier.type}`);
 
-// epicerie.ingredient.forEach(el => {
-//     personne.mainDroite[0].contenue.push(el);
-//     console.log(`${personne.nom} a pris un ${el.nom}`);
-// });
+
 
 epicerie.ingredients.forEach(element => {
     personne.mainDroite[0].contenu.push(element);
     console.log(`${personne.nom} a pris un ${element.nom}`);
 })
 
-// console.log(personne.mainDroite);
+// PAIEMENT
 
 personne.mainDroite[0].contenu.forEach(element => {
     personne.payerArticle(element)
 });
 console.log(personne.argent);
 
+// DEPLACEMENT EPICERIE A MAISON
+
 personne.sedeplacer(maison)
 
-array.forEach(element => {
-    
+personne.mainDroite[0].contenu.forEach(element => {
+    bol.contenu.push(element)
+    personne.mainDroite[0].contenu = personne.mainDroite[0].contenu.filter(item => item !== element)
+    console.log(`l'${element.nom} a été ajouté dans le bol`);
 });
+// RETOUR AU MAGASIN
+
+personne.sedeplacer(epicerie)
+
+personne.mainDroite.splice(epicerie.paniers[0])
+console.log(`${personne.nom} a remis le ${panier.type}`);
+
+// RETOUR A LA MAISON
+
+personne.sedeplacer(maison)
+
+// PREPARATION 
+
+personne.couper(bol.contenu[1])
+console.log(bol.contenu);
+
+
+bol.melanger('omelette')
+console.log(bol.contenu);
+console.log("Les ingrédients sont mélangés");
+
+bol.contenu.push(poele.contenu)
+
+console.log(poele);
+
+// CUISSON
+
+poele.cuir()
+console.log(poele);
