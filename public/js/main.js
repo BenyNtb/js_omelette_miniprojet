@@ -27,7 +27,7 @@ let maison = {
 
 
 let outil = {
-    nom : 'couteau',
+    nom : "couteau",
     action : "coupé"
 }
 
@@ -44,50 +44,46 @@ let epice = new Ingredients('epice', 'moulu', 0.75)
 let fromage = new Ingredients('fromage', 'coupé', 0.65)
 
 let epicerie = {
-    nom : 'epicerie',
+    nom : "epicerie",
     personnes : [],
     paniers : [panier ={
-        type : 'panier',
+        type : "panier",
         contenu : [],
     }],
     ingredients : [oignon, oeuf, epice, fromage]
 }
-// class Lieu {
-//     constructor(nom,personnes,panier) {
-//         this.nom = nom;
-//         this.personnes = personnes;
-//         this.panier = panier;
-//     }
-// }
+
+
 
 
 let poele = {
-    contenue : [0],
-    cuir() {
+    contenu: [],
+    cuire() {
         setTimeout(()=> {
-            if (this.contenue[0] == 0) {
-                console.log('cuit');
-            }
+            this.contenu[0].etat = "cuit";
+            console.log(`l'omelette est cuite`);
         }, 4000)
     }
 }
-poele.cuir()
+
+// poele.cuir()
+
 
 
 let bol = {
     contenu: [],
     melanger(nomMelange){
-        let newMelange = {
-            nomMelange: nomMelange,
-            etat: 'pas cuit'
+        newMelange = {
+            nom  : nomMelange,
+            etat : "pas cuit"
         }
-        this.contenu = [newMelange]
+        this.contenu.splice(0,4,newMelange)
     }
 }
-bol.melanger('omelette')
-console.log(bol);
+// bol.melanger('omelette')
+// console.log(bol);
 
-// OMELETTE
+// DEBUT OMELETTE
 
 console.log(personne.nom + " est actuellement à la " + personne.lieu);
 
@@ -146,13 +142,26 @@ console.log(bol.contenu);
 
 bol.melanger('omelette')
 console.log(bol.contenu);
-console.log("Les ingrédients sont mélangés");
+console.log(`Les ingrédients sont mélangés : ${bol.contenu}`);
 
-bol.contenu.push(poele.contenu)
-
+bol.contenu.push(poele)
 console.log(poele);
+console.log(bol);
+console.log(`le bol est vidé dans la poele`);
 
 // CUISSON
 
-poele.cuir()
+// poele.cuir()
+
 console.log(poele);
+let prete = {
+    contenue : [0],
+    cuir2() {
+        setTimeout(()=> {
+            if (this.contenue[0] == 0) {
+                console.log('votre omelette est cuite');
+            }
+        }, 5000)
+    }
+}
+prete.cuir2()
